@@ -3,13 +3,18 @@ import json
 
 import streamlit as st
 import requests
+from dotenv import load_dotenv
+load_dotenv()
 # configuring openai key
-working_dir = os.path.dirname(os.path.abspath(__file__))
-config_data = json.load(open(f"{working_dir}/config.json"))
+# working_dir = os.path.dirname(os.path.abspath(__file__))
+# config_data = json.load(open(f"{working_dir}/config.json"))
 
 # print(config_data)
 
-OPENROUTER_API_KEY = config_data["OPENROUTER_API_KEY"]
+# OPENROUTER_API_KEY = config_data["OPENROUTER_API_KEY"]
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+if not OPENROUTER_API_KEY:
+    raise ValueError("OPENROUTER_API_KEY is not set. Please set it in the .env file or config.json.")
 # openai.api_key = OPENROUTER_API_KEY
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 HEADER = {
